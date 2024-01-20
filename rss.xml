@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Jingi&#x27;s Blog</title>
+    <link>https://jgkym.github.io/blog/</link>
+    <description>Just a blog</description>
+    <language>en-us</language>
+
+
+    <item>
+      <link>https://jgkym.github.io/blog/2024/01/20/this-is-my-first-post.html</link>
+      <guid>https://jgkym.github.io/blog/2024/01/20/this-is-my-first-post.html</guid>
+      <title><![CDATA[This is my first post]]></title>
+      <description><![CDATA[<h1>This is my first post</h1>
+
+<p>Hello, World!</p>
+]]></description>
+      <pubDate>Sat, 20 Jan 2024 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <link>https://jgkym.github.io/blog/2023/12/30/test.html</link>
+      <guid>https://jgkym.github.io/blog/2023/12/30/test.html</guid>
+      <title><![CDATA[TEST]]></title>
+      <description><![CDATA[<h1>TEST</h1>
+
+<p>TEST</p>
+]]></description>
+      <pubDate>Sat, 30 Dec 2023 00:00:00 +0900</pubDate>
+    </item>
+
+  </channel>
+</rss>
