@@ -38,53 +38,38 @@
 <br/>
 <a href="https://github.com/jingi-data/chatbot-using-langchain"><strong>RAG Q&amp;A</strong></a> ìì±! ê·¸ëì <a href="https://huggingface.co/beomi/KoRWKV-1.5B">beomi/KoRWKV-1.5B</a>ìì ë°ìíë ë¬¸ì ë¥¼ ì¼ë°ííë ê² ê°ë°ì´ ì§ì°ë ìì¸. ê°ì ë¬¸ì¥ì ë°ë³µì ì¼ë¡ ìì±íë ë¬¸ì ê° ììëë° <a href="https://huggingface.co/maywell/Synatra-42dot-1.3B">ë¤ë¥¸ LLM</a>ì ì¬ì©íì ë ë¬¸ì ê° ì¬ë¼ì¡ë¤. ëë¶ì PDF ê¸°ë°ì RAG Q&amp;Aë¥¼ ê¸ë°© ë§ë¤ ì ììë¤. íë ì±ë¥ì ì¢ì§ ìë¤. 1) ëµë³ì´ ì ííì§ ìë¤. ì ì± ë¬¸ìë¥¼ ì°¸ê³ íê¸´ íë ëë¬¸ìëµì íë¤. 10.7Bë¡ ëª¨ë¸ ì¬ì´ì¦ë¥¼ í¤ì ì ë ê½¤ í¨ê³¼ì ì´ìë¤. íì§ë§ 2) ìëµ ìëê° ëë¬´ ëë¦¬ë¤. ìì ì¬ì´ì¦ë ì§§ì ì¿¼ë¦¬ì ìµì 30ì´ ì´ì ê±¸ë ¸ë¤. í° ëª¨ë¸ì 3ë¶ ì ë ê±¸ë¦°ë¯. ì§ê¸ ìí©ììë ë¶ëª ìëì ì±ë¥ì í¨ê» ê°ì í´ì¼ ëë¤. PEFT, LM Studio ê·¸ë¦¬ê³  sLLM ì°¾ìë³´ì.<br/>
 <br/>
-<strong>git rebase</strong>ë¡ commit ì ë¦¬íê¸°. repo setupí  ë ìì§êµ¬ë í commitì´ ë§ì ê¼´ë³´ê¸° ì«ë¤. ì´ë´ ë rebaseë¡ ì§ì ë¶í commitì ë°ì´ë²ë¦¬ë©´ ê¹ëíê² setupí  ì ìì´ ì¢ë¤.
-```bash</p>
+<strong>git rebase</strong>ë¡ commit ì ë¦¬íê¸°. repo setupí  ë ìì§êµ¬ë í commitì´ ë§ì ê¼´ë³´ê¸° ì«ë¤. ì´ë´ ë rebaseë¡ ì§ì ë¶í commitì ë°ì´ë²ë¦¬ë©´ ê¹ëíê² setupí  ì ìì´ ì¢ë¤.</p>
+<div class="highlight"><pre><span/><span class="c1"># "gitì rebaseí´ ì¤, ëíí ëª¨ë(interactive)ë¡ë¤ê°, rootìì ë¶í°"</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>--root
+</pre></div>
 
-<h1><q>gitì rebaseí´ ì¤, ëíí ëª¨ë(interactive)ë¡ë¤ê°, rootìì ë¶í°</q></h1>
+<p>-i flagë --interactive. í¸ì§íê¸° ì¢ê² ìëí°ìì ììí  ì ìë¤.
+ì²ì commitë¶í° ê°ìë²ë¦¬ë ¤ë©´ --root. ì´ì¸ìë HEAD^, HEAD^^, HEAD~3, hash ë± ìíë ìì  ì§ì  ê°ë¥</p>
+<div class="highlight"><pre><span/><span class="c1"># ì ì§í  commitë§ pick, í©ì¹  commitë¤ì pickì squash ëë së¡ ë°ê¾¸ì</span>
+<span class="c1"># ì¬ê¸°ìì  '12345'ì ëë¨¸ì§ ë commitsì í©ì¹ë¤.</span>
+pick<span class="w"> </span><span class="m">12345</span><span class="w"> </span>ì»¤ë°<span class="w"> </span>ë©ìì§<span class="w"> </span>A
+squash<span class="w"> </span><span class="m">67890</span><span class="w"> </span>ì»¤ë°<span class="w"> </span>ë©ìì§<span class="w"> </span>B
+squash<span class="w"> </span>abcde<span class="w"> </span>ì»¤ë°<span class="w"> </span>ë©ìì§<span class="w"> </span>C
+</pre></div>
 
-<p>git rebase -i --root
-<code>
--i flagë --interactive. í¸ì§íê¸° ì¢ê² ìëí°ìì ììí  ì ìë¤.
-ì²ì commitë¶í° ê°ìë²ë¦¬ë ¤ë©´ --root. ì´ì¸ìë HEAD^, HEAD^^, HEAD~3, hash ë± ìíë ìì  ì§ì  ê°ë¥
-</code>bash</p>
+<p>ì ì¥íê³  ëì, ìë¡­ê² ë¨ê¸¸ commit message ìì±íê¸°</p>
+<div class="highlight"><pre><span/>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>&lt;branch<span class="w"> </span>name&gt;<span class="w"> </span>--force
+</pre></div>
 
-<h1>ì ì§í  commitë§ pick, í©ì¹  commitë¤ì pickì squash ëë së¡ ë°ê¾¸ì</h1>
-
-<h1>ì¬ê¸°ìì  '12345'ì ëë¨¸ì§ ë commitsì í©ì¹ë¤.</h1>
-
-<p>pick 12345 ì»¤ë° ë©ìì§ A
-squash 67890 ì»¤ë° ë©ìì§ B
-squash abcde ì»¤ë° ë©ìì§ C
-<code>
-ì ì¥íê³  ëì, ìë¡­ê² ë¨ê¸¸ commit message ìì±íê¸°
-</code>bash
-git push origin <branch name=""> --force
-```
-hubì ì  ë, --force ìµìì¼ë¡ ë¹¡ì¸ê² ì´ì¤ì¼ íë¤. </branch></p>
+<p>hubì ì  ë, --force ìµìì¼ë¡ ë¹¡ì¸ê² ì´ì¤ì¼ íë¤. </p>
 
 <h2>Fri</h2>
 
-<figure>
-    <img src="./lcel.png" alt="LCEL Pipeline"/>
-    <figcaption>LCEL Pipeline</figcaption>
-</figure>
+<p><img src="./lcel.png" alt="LCEL Pipeline" title="LCEL Pipeline"/></p>
 
-<p><a href="https://python.langchain.com/docs/expression_language/"><strong>LangChain Expression Language(LCEL)</strong></a> ì¤ëªì ë°ë¥´ë©´, ë¤ìí ê¸°ë¥ë¤ì´ ë¸ë¡ì²ë¼ ì ìëì´ ìì´ íìì ë°ë¼ ë¼ì ë§ì¶ê¸°ë§ íë©´ ëë¤. ì´ë¬í ë¸ë¡ë¤ì ì°ê²°íì¬ íì´íë¼ì¸ì ë§ë ë¤ë ìë¯¸ìì Lang'Chain'ì¸ ê² ê°ë¤. 
-```bash</p>
-
-<h1>ìì 1</h1>
-
-<p>chain1 = prompt | model</p>
-
-<h1>ìì 2</h1>
-
-<p>chain2 = prompt | model | outputparser</p>
-
-<h1>ìì 3</h1>
-
-<p>chain3 = model | outputparser 
-```</p>
+<p><a href="https://python.langchain.com/docs/expression_language/"><strong>LangChain Expression Language(LCEL)</strong></a> ì¤ëªì ë°ë¥´ë©´, ë¤ìí ê¸°ë¥ë¤ì´ ë¸ë¡ì²ë¼ ì ìëì´ ìì´ íìì ë°ë¼ ë¼ì ë§ì¶ê¸°ë§ íë©´ ëë¤. ì´ë¬í ë¸ë¡ë¤ì ì°ê²°íì¬ íì´íë¼ì¸ì ë§ë ë¤ë ìë¯¸ìì Lang'Chain'ì¸ ê² ê°ë¤.</p>
+<div class="highlight"><pre><span/><span class="c1"># ìì 1</span>
+<span class="nv">chain1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>prompt<span class="w"> </span><span class="p">|</span><span class="w"> </span>model
+<span class="c1"># ìì 2</span>
+<span class="nv">chain2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>prompt<span class="w"> </span><span class="p">|</span><span class="w"> </span>model<span class="w"> </span><span class="p">|</span><span class="w"> </span>outputparser
+<span class="c1"># ìì 3</span>
+<span class="nv">chain3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>model<span class="w"> </span><span class="p">|</span><span class="w"> </span>outputparser
+</pre></div>
 ]]></description>
       <pubDate>Fri, 26 Jan 2024 00:00:00 +0900</pubDate>
     </item>

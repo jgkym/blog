@@ -40,53 +40,38 @@
 <br>
 <a href="https://github.com/jingi-data/chatbot-using-langchain"><strong>RAG Q&amp;A</strong></a> 완성! 그동안 <a href="https://huggingface.co/beomi/KoRWKV-1.5B">beomi/KoRWKV-1.5B</a>에서 발생하는 문제를 일반화했던 게 개발이 지연된 원인. 같은 문장을 반복적으로 생성하는 문제가 있었는데 <a href="https://huggingface.co/maywell/Synatra-42dot-1.3B">다른 LLM</a>을 사용했을 때 문제가 사라졌다. 덕분에 PDF 기반의 RAG Q&amp;A를 금방 만들 수 있었다. 허나 성능은 좋지 않다. 1) 답변이 정확하지 않다. 정책 문서를 참고하긴 하나 동문서답을 한다. 10.7B로 모델 사이즈를 키웠을 때 꽤 효과적이었다. 하지만 2) 응답 속도가 너무 느리다. 작은 사이즈도 짧은 쿼리에 최소 30초 이상 걸렸다. 큰 모델은 3분 정도 걸린듯. 지금 상황에서는 분명 속도와 성능을 함께 개선해야 된다. PEFT, LM Studio 그리고 sLLM 찾아보자.<br>
 <br>
-<strong>git rebase</strong>로 commit 정리하기. repo setup할 때 자질구레한 commit이 많아 꼴보기 싫다. 이럴 때 rebase로 지저분한 commit을 밀어버리면 깔끔하게 setup할 수 있어 좋다.
-```bash</p>
+<strong>git rebase</strong>로 commit 정리하기. repo setup할 때 자질구레한 commit이 많아 꼴보기 싫다. 이럴 때 rebase로 지저분한 commit을 밀어버리면 깔끔하게 setup할 수 있어 좋다.</p>
+<div class="highlight"><pre><span></span><span class="c1"># &quot;git아 rebase해 줘, 대화형 모드(interactive)로다가, root에서 부터&quot;</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>--root
+</pre></div>
 
-<h1><q>git아 rebase해 줘, 대화형 모드(interactive)로다가, root에서 부터</q></h1>
+<p>-i flag는 --interactive. 편집하기 좋게 에디터에서 작업할 수 있다.
+처음 commit부터 갈아버리려면 --root. 이외에도 HEAD^, HEAD^^, HEAD~3, hash 등 원하는 시점 지정 가능</p>
+<div class="highlight"><pre><span></span><span class="c1"># 유지할 commit만 pick, 합칠 commit들은 pick을 squash 또는 s로 바꾸자</span>
+<span class="c1"># 여기에선 &#39;12345&#39;에 나머지 두 commits을 합친다.</span>
+pick<span class="w"> </span><span class="m">12345</span><span class="w"> </span>커밋<span class="w"> </span>메시지<span class="w"> </span>A
+squash<span class="w"> </span><span class="m">67890</span><span class="w"> </span>커밋<span class="w"> </span>메시지<span class="w"> </span>B
+squash<span class="w"> </span>abcde<span class="w"> </span>커밋<span class="w"> </span>메시지<span class="w"> </span>C
+</pre></div>
 
-<p>git rebase -i --root
-<code>
--i flag는 --interactive. 편집하기 좋게 에디터에서 작업할 수 있다.
-처음 commit부터 갈아버리려면 --root. 이외에도 HEAD^, HEAD^^, HEAD~3, hash 등 원하는 시점 지정 가능
-</code>bash</p>
+<p>저장하고 나서, 새롭게 남길 commit message 작성하기</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>&lt;branch<span class="w"> </span>name&gt;<span class="w"> </span>--force
+</pre></div>
 
-<h1>유지할 commit만 pick, 합칠 commit들은 pick을 squash 또는 s로 바꾸자</h1>
-
-<h1>여기에선 &#39;12345&#39;에 나머지 두 commits을 합친다.</h1>
-
-<p>pick 12345 커밋 메시지 A
-squash 67890 커밋 메시지 B
-squash abcde 커밋 메시지 C
-<code>
-저장하고 나서, 새롭게 남길 commit message 작성하기
-</code>bash
-git push origin <branch name> --force
-```
-hub에 쏠 때, --force 옵션으로 빡세게 쏴줘야 한다. </p>
+<p>hub에 쏠 때, --force 옵션으로 빡세게 쏴줘야 한다. </p>
 
 <h2>Fri</h2>
 
-<figure>
-    <img src=./lcel.png alt='LCEL Pipeline'>
-    <figcaption>LCEL Pipeline</figcaption>
-</figure>
+<p><img src="./lcel.png" alt="LCEL Pipeline" title="LCEL Pipeline"></p>
 
-<p><a href="https://python.langchain.com/docs/expression_language/"><strong>LangChain Expression Language(LCEL)</strong></a> 설명에 따르면, 다양한 기능들이 블록처럼 정의되어 있어 필요에 따라 끼워 맞추기만 하면 된다. 이러한 블록들을 연결하여 파이프라인을 만든다는 의미에서 Lang&#39;Chain&#39;인 것 같다. 
-```bash</p>
-
-<h1>예시 1</h1>
-
-<p>chain1 = prompt | model</p>
-
-<h1>예시 2</h1>
-
-<p>chain2 = prompt | model | outputparser</p>
-
-<h1>예시 3</h1>
-
-<p>chain3 = model | outputparser 
-```</p>
+<p><a href="https://python.langchain.com/docs/expression_language/"><strong>LangChain Expression Language(LCEL)</strong></a> 설명에 따르면, 다양한 기능들이 블록처럼 정의되어 있어 필요에 따라 끼워 맞추기만 하면 된다. 이러한 블록들을 연결하여 파이프라인을 만든다는 의미에서 Lang&#39;Chain&#39;인 것 같다.</p>
+<div class="highlight"><pre><span></span><span class="c1"># 예시 1</span>
+<span class="nv">chain1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>prompt<span class="w"> </span><span class="p">|</span><span class="w"> </span>model
+<span class="c1"># 예시 2</span>
+<span class="nv">chain2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>prompt<span class="w"> </span><span class="p">|</span><span class="w"> </span>model<span class="w"> </span><span class="p">|</span><span class="w"> </span>outputparser
+<span class="c1"># 예시 3</span>
+<span class="nv">chain3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>model<span class="w"> </span><span class="p">|</span><span class="w"> </span>outputparser
+</pre></div>
 
 </article>
 <nav>
