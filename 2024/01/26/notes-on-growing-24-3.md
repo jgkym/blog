@@ -68,5 +68,3 @@ chain2 = prompt | model | outputparser
 # 예시 3
 chain3 = model | outputparser 
 ```
-
-   
