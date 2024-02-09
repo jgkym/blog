@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Notes on Growing 24/5 &mdash; Blog</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="../../../static/light.css" type="text/css">
+<link rel="stylesheet" href="../../../static/pygments.css" type="text/css">
+<link rel="shortcut icon" href="../../../static/icon.ico" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<header><span>February 09, 2024</span></header>
+<article>
+<h1>Notes on Growing 24/5</h1>
+
+<h2>Mon</h2>
+
+<p><strong>#Back To Basic</strong>. 깃허브 서치를 하다보면 보기에 깔끔하고 이해가 잘되는 코드들을 자주 본다. 공통점이라면 파이썬 데코레이터 활용을 굉장히 잘하고, 또 객체로 기능들을 잘 분리해 놓았다. 개인적으로 파이썬을 학습하며 이러한 부분이 bottleneck이었다. <a href="https://github.com/monologg/R-BERT">R-BERT</a> 코드를 리뷰했을 때 느끼는게 많았고 이 정도의 코드 퀄리티를 목표로 발전하고자 한다. One step more를 위해서, 데코레이터와 오버라이딩에 대해서 심도있게 학습해보자.</p>
+
+<h2>Tue</h2>
+
+<p><strong>#HuggingFace vs Lightning</strong>. Hydra 템플릿을 사용해보며 라이트닝의 다양한 API를 익힐 수 있었는데, 이제는 좀 놓아줘야 되겠다. NLP 업계에서는 HuggingFace 라이브러리를 압도적으로 많이 쓴다는 소식을 접했다. 또한 라이트닝 Repo를 살펴보면 정말 DDP 기능에 대한 이슈가 정말 많다. 장기적인 관점에서 HuggingFace에 능숙해지는 게 좋아 보인다. 무엇보다 생각보다 커스터마이징하기 쉽다는 것을 알게되며 더욱 혹하게 되었다. 클래스 상속을 하면 거의 모든 기능을 구현할 수 있어 보인다. 앞으로 PyTorch와 함께 중점적으로 익혀보자.  </p>
+
+<h2>Thu</h2>
+
+<p><strong>#EDA</strong>할 때, 텍스트를 보다 유심히 봐보자. 지금까지 텍스트 데이터를 탐색하며 문장을 세심하게 보지는 않았다. 소스 채널 별 언어사용을 파악하거나 데이터셋에서 토픽을 찾아보았던 것처럼 넓은 관점에서 패턴을 파악하려한 듯. 좀더 디테일한 텍스트 EDA를 접할 수 있었다. 각 문장에서 문법적인 오류를 찾거나 truncation을 고려하며 문장을 살펴보았던 게 기억에 남는다. 또한 문자 단위의 길이가 아닌 토큰 단위 길이를 재보는 것도 인상 깊었다. 앞으로 텍스트 EDA를 할 때는 토큰 길이에 대한 scree plot을 그려보거나 [UNK] 토큰이 있는 문장들을 찾아봐서 임베딩을 방법을 고려해봐야 되겠다.  </p>
+
+<p><strong>#Haystack</strong>을 써봤다. API가 복잡해서 사용하기 쉽지 않았다. 무엇보다 import를 어떻게 해야되는 건지 설명을 해주질 않아서 찾아보기 힘들었다. HuggingFace가 잘되어 있는 건가. 어떻게 BM25를 구현하긴 했는데 문서를 찾아오질 못한다. 함수를 잘 쓰고있는 건지, 아니면 퍼포먼스의 문제가 있는 건지는 확인이 안된다.     </p>
+
+</article>
+<nav>
+
+<div id="prev"><span>« <a href="../../../2024/02/03/notes-on-growing-24-4.html">Notes on Growing 24/4</a></span></div>
+
+
+</nav>
+<footer><span>By <a href="https://jgkym.github.io/">Jingi Kim</a> | <a href="../../../index.html">Index</a></span></footer>
+</body>
+</html>
