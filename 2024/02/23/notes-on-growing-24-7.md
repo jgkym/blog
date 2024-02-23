@@ -2,8 +2,8 @@
 
 ## MISSON
 
-- [ ] **READ** [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
-- [x] **IMPLEMENT** [ColBERT](https://github.com/stanford-futuredata/ColBERT)
+- ❌ **READ** [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
+- ✅ **IMPLEMENT** [ColBERT](https://github.com/stanford-futuredata/ColBERT)
 
 
 
@@ -72,7 +72,7 @@ print(your_package.__path__)
 
 ## THU
 
-**#ColBERT 강화**. 현재 KLUE-MRC 데이터셋에서 3952개의 train examples를 사용해서 ColBERT를 사전학습 시키고 있음. Backbone을 klue/roberta-large를 써보았지만 결과가 좋지는 않았다. 언론진흥재단에서 공개한 kpfbert를 사용했을 때, 가장 좋았다. 관련된 문서를 잘 찾아오도록 더 많은 tranining examples를 준비함. 가장 유사한 데이터셋인 KorQuad v1을 합쳤고, 7만 여개의 질문과 문서 쌍을 준비함. 먼저 [intfloat/multilingual-e5-large · Hugging Face](https://huggingface.co/intfloat/multilingual-e5-large)를 사용해서 Hard negative를 진행함. 이거 효과 굉장히 좋았다. 이전까지 한국어 기반 sentence transformers에 대해 회의적이었는데 생각이 바뀜. 실제로 triples 결과를 확인했는데, 육안으로 봤을 때도 positive와 negative passage가 매우 닮았다. 데이터 준비에서 부터 학습까지 총 8시간 정도 소요됐다. Indexing까지 약 1시간 추가. 성능은 매우 굿!
+**#ColBERT 강화**. 현재 KLUE-MRC 데이터셋에서 3952개의 train examples를 사용해서 ColBERT를 사전학습 시키고 있음. Backbone을 klue/roberta-large를 써보았지만 결과가 좋지는 않았다. 언론진흥재단에서 공개한 kpfbert를 사용했을 때, 가장 좋았다. 관련된 문서를 잘 찾아오도록 더 많은 tranining examples를 준비함. 가장 유사한 데이터셋인 KorQuad v1을 합쳤고, 7만 여개의 질문과 문서 쌍을 준비함. 먼저 [intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)를 사용해서 Hard negative를 진행함. 이거 효과 굉장히 좋았다. 이전까지 한국어 기반 sentence transformers에 대해 회의적이었는데 생각이 바뀜. 실제로 triples 결과를 확인했는데, 육안으로 봤을 때도 positive와 negative passage가 매우 닮았다. 데이터 준비에서 부터 학습까지 총 8시간 정도 소요됐다. Indexing까지 약 1시간 추가. 성능은 매우 굿!
 
 
 
@@ -88,7 +88,7 @@ print(your_package.__path__)
 
 
 
-**#Top k를 줄이자!**. 10, 20, 30개로 k를 늘렸을 때 오히려 점수가 떨어짐. k가 커질수록 gold passage는 반드시 retrievals에 포함되겠지만, context가 길어질수록 reader는 오히려 헷갈려질 것. 좋은 결과를 얻기 위해서 정확하고 컴팩트하게 문서를 불러와서 extraction을 하는게 좋을 것. retriever 성능이 좋다는 전제 하에 k를 줄여보았다. 5, 3, 2, 1로 k를 낮추었는데 k가 2일 때 성능이 최고.
+**#Top k를 줄이자!** 10, 20, 30개로 k를 늘렸을 때 오히려 점수가 떨어짐. k가 커질수록 gold passage는 반드시 retrievals에 포함되겠지만, context가 길어질수록 reader는 오히려 헷갈림. 좋은 결과를 얻기 위해서 정확하고 컴팩트하게 문서를 불러와서 extraction을 하는게 좋을 것. retriever 성능이 좋다는 전제 하에 k를 줄여보았다. 5, 3, 2, 1로 k를 낮추었는데 k가 2일 때 성능이 최고.
 
 
 
