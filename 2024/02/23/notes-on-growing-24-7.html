@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Notes on Growing 24/7 &mdash; Blog</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="../../../static/light.css" type="text/css">
+<link rel="stylesheet" href="../../../static/pygments.css" type="text/css">
+<link rel="shortcut icon" href="../../../static/icon.ico" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+<header><span>February 23, 2024</span></header>
+<article>
+<h1>Notes on Growing 24/7</h1>
+
+<h2>MISSON</h2>
+
+<ul>
+<li>[ ] <strong>READ</strong> <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">LLM Powered Autonomous Agents</a></li>
+<li>[x] <strong>IMPLEMENT</strong> <a href="https://github.com/stanford-futuredata/ColBERT">ColBERT</a></li>
+</ul>
+
+<h2>MON</h2>
+
+<p> <a href="https://github.com/bclavie/RAGatouille"><strong>#RAGatouille</strong></a>. ColBERT를 쉽게 사용할 수 있도록 도와주는 라이브러리. 사용법은 크게 두 가지로 나뉨. 스크래치에서 부터 학습하는 방법과 저장된 모델이나 인덱스를 불러와서 쓰는 방법. RAGTrainer와 RAGPretrainedModel 클래스가 각각애 대응됨. 다만 아쉬웠던 건 API 설명이 불충분해서 사용법을 익히기 쉽지 않음. 인풋으로 사용하는 데이터가 어떤 형식이어야 되는지 알기 어려웠다 (저기 튜토리얼 한 구석에 설명이 있음). 이외에는 컴팩트하게 기능이 구성되어 있어 사용하기 수월했음.  </p>
+
+<p><a href="https://github.com/stanford-futuredata/ColBERT"><strong>#ColBERT</strong></a>관련 에러. RAGatouille로 인덱싱할 때 cuda 관련 에러가 발생한다. RAGatouille의 핵심 기능들은 ColBERT 라이브러리를 오버라이딩하고 있고, 발생하는 문제들은 ColBERT 함수 사용해서 발생됨. </p>
+
+<p>    <strong>CUDA_HOME</strong></p>
+<div class="highlight"><pre><span></span>OSError:<span class="w"> </span>CUDA_HOME<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>set.<span class="w"> </span>Please<span class="w"> </span><span class="nb">set</span><span class="w"> </span>it<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>CUDA<span class="w"> </span>install<span class="w"> </span>root.
+</pre></div>
+
+<p>-&gt; <code>import torch</code>를 쓰면 에러가 발생하지 않는 경우가 생김. 찾아보니 torch의 utils 중에는 cuda의 경로를 찾는 기능이 있기도</p>
+
+<p>    <strong>decompress<em>residuals</em>cpp.so</strong></p>
+<div class="highlight"><pre><span></span>ImportError:<span class="w"> </span>/data/ephemeral/home/.cache/torch_extensions/py39_cu117/decompress_residuals_cpp/decompress_residuals_cpp.so:<span class="w"> </span>cannot<span class="w"> </span>open<span class="w"> </span>shared<span class="w"> </span>object<span class="w"> </span>file:<span class="w"> </span>No<span class="w"> </span>such<span class="w"> </span>file<span class="w"> </span>or<span class="w"> </span>directory
+</pre></div>
+
+<p>무슨 수를 쓰더라도, 결국 이 에러로 귀결된다. 컴파일링 된 파일이 없다고 한다. 이 문제는 마찬가지로 cuda 경로 인식 문제로 판단됨. <code>nvcc</code>를 찾을 수 있어야 하지만, 현재 서버 환경에는 없다. <code>cudatoolkit-dev</code>를 설치해서 해결했다는 코멘트를 보았지만, 설치할 때 서버가 터져버림. cuda는 참 어렵다...</p>
+
+<h2>TUE</h2>
+
+<p><strong>#Coarse vs. Fine granularity</strong>.  </p>
+
+<p><strong>#pip 캐시를 안전하게 지우기</strong></p>
+<div class="highlight"><pre><span></span>pip<span class="w"> </span>cache<span class="w"> </span>purge
+</pre></div>
+
+<p><strong>#설치한 package의 소스코드를 수정하고 싶다면?</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># package의 설치 경로 확인</span>
+<span class="kn">import</span> <span class="nn">your_package</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">your_package</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+
+<span class="c1"># or</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">your_package</span><span class="o">.</span><span class="n">__path__</span><span class="p">)</span>
+</pre></div>
+
+<h2>WED</h2>
+
+<p><strong>#Colab으로 Indexing</strong>. CUDA 문제로 ColBERT를 놓고 있었지만, 그동안 학습한게 아쉬워서 최후의 수단으로 코랩 환경을 사용. 여기에서는 인덱싱 작업이 정상적으로 수행됨. <code>faiss-gpu</code>를 사용하나 모델 학습만큼 gpu를 사용하지는 않는다. T4도 OK. 왜 그동안 이 생각을 안했을까. 에러와 일기토를 굳이 안했어도 되지 않았을까 싶음. 다양한 작업환경을 먼저 시도했더라면 더 좋았겠다. 메모. 무튼 인덱싱은 대개 30분 정도 걸림. 다만 인덱싱을 저장하고 불러와서 사용할 때에는 경로 인식 문제가 발생한다. 또한 search 과정에서도 CUDA 에러가 발생하는 것을 확인함. 따라서 인덱싱에서 부터  retrievals를 test dataset에 붙이 작업까지 하나의 파이프라인으로 만들어 외부에서 작업함. inference는 빠르다는 장점.  </p>
+
+<p><strong>#감정을 기록하자</strong>. 오늘 함께자라기에서 인상 깊었던 점. 곰곰히 생각해보니 학습을 하면서 그때 어떤 생각을 가졌는지 돌아보는게 좋을 것 같다는 생각이 들었다. 그래서 적어본다. nvcc 개새끼.</p>
+
+<h2>THU</h2>
+
+<p><strong>#ColBERT 강화</strong>. 현재 KLUE-MRC 데이터셋에서 3952개의 train examples를 사용해서 ColBERT를 사전학습 시키고 있음. Backbone을 klue/roberta-large를 써보았지만 결과가 좋지는 않았다. 언론진흥재단에서 공개한 kpfbert를 사용했을 때, 가장 좋았다. 관련된 문서를 잘 찾아오도록 더 많은 tranining examples를 준비함. 가장 유사한 데이터셋인 KorQuad v1을 합쳤고, 7만 여개의 질문과 문서 쌍을 준비함. 먼저 <a href="https://huggingface.co/intfloat/multilingual-e5-large">intfloat/multilingual-e5-large · Hugging Face</a>를 사용해서 Hard negative를 진행함. 이거 효과 굉장히 좋았다. 이전까지 한국어 기반 sentence transformers에 대해 회의적이었는데 생각이 바뀜. 실제로 triples 결과를 확인했는데, 육안으로 봤을 때도 positive와 negative passage가 매우 닮았다. 데이터 준비에서 부터 학습까지 총 8시간 정도 소요됐다. Indexing까지 약 1시간 추가. 성능은 매우 굿!</p>
+
+<p><strong>#Hybrid retrieval</strong>. ColBERT로 성능을 올렸지만 BM25 보다 조금 높은 수준이다. 그래서 DPR+BM25처럼 두 리트리버의 결과를 합쳐보기로 함.   </p>
+
+<p><strong>어떻게 합쳐야 될까?</strong> </p>
+
+<ol>
+<li><p>먼저 BM25에서 관련 문서 300개를 추려내고 그 문서들을 ColBERT를 사용해서 rerank. 사실 이러면 결과가 BM25에 대체로 종속됨. 혹은 이도저도 아닌 상황이 되어버림. </p></li>
+<li><p>그래서 두 리트리버에서 각각 100개의 문서를 뽑아서 합쳐봄. ColBERT rerank를 통해 200개의 문서에서 Top k를 추려냄. 또 이러면 ColBERT에 결과가 종속됨. ColBERT 입맛에 맞는 결과가 상위에 위치하기 때문에</p></li>
+<li><p>두 결과를 합치고, 스코어를 단순하게 Sorting하자. Score는 결국에 Prob이니깐 두 리트리버에서 모두 동일한 scale. 점수가 클수록 이 문서가 gold라는 확신은 같은 수준일 것. 따라서 top k에서 두 리트리버의 결과를 적절하게 다룰 수 있을 것.<u>실제로 리더보드 점수가 꽤 오름!</u></p></li>
+</ol>
+
+<p><strong>#Top k를 줄이자!</strong>. 10, 20, 30개로 k를 늘렸을 때 오히려 점수가 떨어짐. k가 커질수록 gold passage는 반드시 retrievals에 포함되겠지만, context가 길어질수록 reader는 오히려 헷갈려질 것. 좋은 결과를 얻기 위해서 정확하고 컴팩트하게 문서를 불러와서 extraction을 하는게 좋을 것. retriever 성능이 좋다는 전제 하에 k를 줄여보았다. 5, 3, 2, 1로 k를 낮추었는데 k가 2일 때 성능이 최고.</p>
+
+<h2>FRI</h2>
+
+<p><strong>#논문 구현</strong>을 잘하고 싶다. 문제에 맞는 툴킷을 빠르게 익히는 것도 좋지만, 커스터마이징하는게 쉽지는 않다. 스크래치에서 부터 코드를 구현할 수 있으면 좋을 것 같다. </p>
+
+</article>
+<nav>
+
+<div id="prev"><span>« <a href="../../../2024/02/09/notes-on-growing-24-5.html">Notes on Growing 24/5</a></span></div>
+
+
+</nav>
+<footer><span>By <a href="https://jgkym.github.io/">Jingi Kim</a> | <a href="../../../index.html">Index</a></span></footer>
+</body>
+</html>
